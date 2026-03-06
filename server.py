@@ -26,7 +26,6 @@ DATABASE_PATH = os.path.join(os.path.dirname(__file__), "database.db")
 # ─────────────────────────────────────────────
 app = Flask(__name__, template_folder="templates", static_folder="static")
 CORS(app)
-init_db()
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
@@ -230,6 +229,8 @@ def setup_webhook():
 # ─────────────────────────────────────────────
 #  Entry point
 # ─────────────────────────────────────────────
+init_db()
+
 if __name__ == "__main__":
     init_db()
     port = int(os.environ.get("PORT", 5000))
