@@ -24,6 +24,9 @@ const statusBar       = document.getElementById("statusBar");
 const charCount       = document.getElementById("charCount");
 const msgCount        = document.getElementById("msgCount");
 const typingIndicator = document.getElementById("typingIndicator");
+const rejoinInput = document.getElementById("rejoinInput");
+const rejoinBtn   = document.getElementById("rejoinBtn");
+const copyIdBtn   = document.getElementById("copyIdBtn");
 
 // ─────────────────────────────────────────────
 //  Session management
