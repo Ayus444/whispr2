@@ -184,15 +184,10 @@ function showTypingThenClear() {
 }
 
 function escapeHtml(str) {
-  return str
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#x27;")
-    .replace(/\n/g, "<br/>");
+  const div = document.createElement('div');
+  div.appendChild(document.createTextNode(str));
+  return div.innerHTML.replace(/\n/g, "<br/>");
 }
-
 function formatTime(iso) {
   try {
     const d = new Date(iso);
