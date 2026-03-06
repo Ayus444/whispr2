@@ -553,3 +553,19 @@ body {
   .chat-messages   { padding: 10px 8px; }
   .message-bubble  { max-width: 88%; }
 }
+.rejoin-input {
+  width: 100%;
+  padding: 5px 8px;
+  font-family: var(--font-pixel);
+  font-size: 9px;
+  letter-spacing: 1px;
+  border: 1px solid var(--xp-silver-dark);
+  box-shadow: var(--inset);
+  background: var(--xp-white);
+  outline: none;
+  text-transform: uppercase;
+  color: var(--xp-blue-dark);
+}
+.rejoin-input:focus { border-color: var(--xp-blue-mid); }
+.rejoin-btn { width: 100%; background: linear-gradient(to bottom, #f0d080 0%, #c8a020 100%); }
+.copy-btn   { width: 100%; margin-top: 3px; }
