@@ -26,6 +26,7 @@ DATABASE_PATH = os.path.join(os.path.dirname(__file__), "database.db")
 # ─────────────────────────────────────────────
 app = Flask(__name__, template_folder="templates", static_folder="static")
 CORS(app)
+init_db()
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
