@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>whispr — anonymous messages</title>
+  <link rel="stylesheet" href="/static/style.css"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=VT323&family=Tiny5&family=Press+Start+2P&family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet"/>
+</head>
+<body>
+
+  <!-- Floating particles canvas -->
+  <canvas id="particles"></canvas>
+
+  <!-- CRT scanline overlay -->
+  <div class="crt-overlay"></div>
+
+  <!-- Desktop wallpaper grid -->
+  <div class="desktop-grid"></div>
+
+  <main class="window-container">
+
+    <!-- Title bar -->
+    <div class="title-bar">
+      <div class="title-bar-left">
+        <span class="title-icon">💌</span>
+        <span class="title-text">whispr.exe — Anonymous Messenger</span>
+      </div>
+      <div class="title-bar-buttons">
+        <button class="tb-btn tb-min" title="Minimise">_</button>
+        <button class="tb-btn tb-max" title="Maximise">□</button>
+        <button class="tb-btn tb-close" title="Close">✕</button>
+      </div>
+    </div>
+
+    <!-- Menu bar -->
+    <div class="menu-bar">
+      <span class="menu-item">File</span>
+      <span class="menu-item">Edit</span>
+      <span class="menu-item active">Message</span>
+      <span class="menu-item">Help</span>
+    </div>
+
+    <!-- Main content -->
+    <div class="window-body">
+
+      <!-- Sidebar / session info panel -->
+      <aside class="sidebar">
+        <div class="sidebar-section">
+          <div class="sidebar-label">SESSION</div>
+          <div class="chat-id-display">
+            <span class="chat-id-label">Your ID:</span>
+            <code id="chatIdDisplay">——</code>
+          </div>
+          <button class="pixel-btn new-session-btn" id="newSessionBtn">⟳ New Session</button>
+        </div>
+
+        <div class="sidebar-section">
+          <div class="sidebar-label">STATUS</div>
+          <div class="status-indicator">
+            <span class="status-dot" id="statusDot"></span>
+            <span id="statusText">Connecting…</span>
+          </div>
+        </div>
+
+        <div class="sidebar-section sidebar-tips">
+          <div class="sidebar-label">HOW IT WORKS</div>
+          <ol class="tips-list">
+            <li>Type your message below</li>
+            <li>Hit <kbd>Send</kbd> or press <kbd>Enter</kbd></li>
+            <li>The admin replies via Telegram</li>
+            <li>Replies appear here in real-time</li>
+          </ol>
+        </div>
+
+        <div class="sidebar-mascot">
+          <div class="pixel-heart" id="pixelHeart">♥</div>
+          <div class="mascot-text">100% anonymous</div>
+        </div>
+      </aside>
+
+      <!-- Chat panel -->
+      <section class="chat-panel">
+        <div class="chat-header">
+          <span class="chat-header-icon">📡</span>
+          <span>Live Chat</span>
+          <span class="msg-count" id="msgCount">0 messages</span>
+        </div>
+
+        <div class="chat-messages" id="chatMessages">
+          <div class="welcome-msg">
+            <div class="welcome-ascii">
+╔══════════════════╗
+║  WELCOME TO      ║
+║  WHISPR v1.0     ║
+╚══════════════════╝</div>
+            <p>Your messages are completely anonymous.<br/>
+            The admin cannot see who you are — only your session ID.</p>
+          </div>
+        </div>
+
+        <!-- Typing indicator -->
+        <div class="typing-indicator hidden" id="typingIndicator">
+          <span class="typing-dot"></span>
+          <span class="typing-dot"></span>
+          <span class="typing-dot"></span>
+          <span class="typing-label">Admin is typing…</span>
+        </div>
+
+        <!-- Input area -->
+        <div class="input-area">
+          <div class="input-wrapper">
+            <textarea
+              id="messageInput"
+              class="message-input"
+              placeholder="Type your anonymous message here…"
+              rows="3"
+              maxlength="1000"
+            ></textarea>
+            <div class="input-meta">
+              <span class="char-counter"><span id="charCount">0</span>/1000</span>
+            </div>
+          </div>
+          <button class="send-btn" id="sendBtn">
+            <span class="send-icon">▶</span>
+            <span class="send-label">SEND</span>
+          </button>
+        </div>
+
+        <!-- Status bar -->
+        <div class="status-bar">
+          <span id="statusBar">Ready</span>
+          <span class="status-bar-right">whispr v1.0.0 | &copy; 2025</span>
+        </div>
+
+      </section>
+    </div>
+  </main>
+
+  <script src="/static/script.js"></script>
+</body>
+</html>
