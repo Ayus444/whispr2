@@ -300,6 +300,50 @@ initParticles();
 animateParticles();
 window.addEventListener("resize", () => { resizeCanvas(); initParticles(); });
 
+async function rejoinSession() {
+  const id = rejoinInput.value.trim().toUpperCase();
+  if (!id || id.length < 6) { setStatusBar("Enter a valid session ID!"); return; }
+  stopPolling();
+  lastMsgId = 0;
+  chatMessages.innerHTML = "";
+  chatId = id;
+  chatIdDisplay.textContent = chatId;
+  rejoinInput.value = "";
+  try {
+    const r = await fetch(`/api/messages/${chatId}?since_id=0`);
+    const d = await r.json();
+    if (d.messages && d.messages.length) {
+      d.messages.forEach(msg => {
+        appendBubble(msg);
+        lastMsgId = Math.max(lastMsgId, msg.id);
+      });
+      updateMsgCount();
+      setStatusBar("Session restored — " + chatId);
+      addSysMsg("✅ Rejoined session " + chatId);
+    } else {
+      addSysMsg("No messages found for ID: " + chatId);
+      setStatusBar("No messages found");
+    }
+  } catch (e) {
+    addSysMsg("⚠ Could not load session.", true);
+  }
+  setStatus("online", "Online");
+  startPolling();
+}
+
+function copySessionId() {
+  if (!chatId) return;
+  navigator.clipboard.writeText(chatId).then(() => {
+    copyIdBtn.textContent = "✓ Copied!";
+    setTimeout(() => copyIdBtn.textContent = "⎘ Copy ID", 2000);
+  });
+}
+
+rejoinBtn.addEventListener("click", rejoinSession);
+copyIdBtn.addEventListener("click", copySessionId);
+rejoinInput.addEventListener("keydown", e => {
+  if (e.key === "Enter") rejoinSession();
+});
 // ─────────────────────────────────────────────
 //  Boot sequence
 // ─────────────────────────────────────────────
